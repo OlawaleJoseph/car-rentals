@@ -4,7 +4,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-mongoose.connect(process.env.URI, { useNewUrlParser: true });
+mongoose.connect(process.env.URI, { useNewUrlParser: true })
+.then(() => console.log("Connected to DB"))
+.catch(err =>  console.log(err));
+
+
 const app = express();
 
 const port = process.env.PORT || 3000;

@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  username: {
-    type: String,
-    required: [true, "Username field is empty"]
+  averageRating: {
+      type: Number,
+      default: 0
   },
   email: {
     type: String,
@@ -26,8 +26,14 @@ const userSchema = new mongoose.Schema({
     min: [8, "At least 8 characters long"],
     max: [20]
   },
-  isAdmin: Boolean,
-  banStatus: Boolean
+  isAdmin: {
+      type: Boolean,
+      default: false
+  },
+    banStatus: {
+        type: Boolean,
+        default: false
+    },
 });
 
 exports = mongoose.model("User", userSchema);
