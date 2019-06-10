@@ -24,7 +24,7 @@ class User {
       console.log(newUser);
       res.send(newUser);
     } catch (error) {
-      console.log(error);
+      // console.log(error.message);
       res.send(error);
     }
   }
