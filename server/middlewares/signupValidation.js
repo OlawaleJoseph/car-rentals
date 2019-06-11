@@ -71,5 +71,6 @@ export const isRegistered = async (req, res, next) => {
         status: 500,
         error: "Internal Server Error"
       });
+
   }
 };
