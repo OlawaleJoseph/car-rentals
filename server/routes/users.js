@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
 
 router.post("/signup", validateNewUser, isRegistered,User.create);
 
-router.post("/login", validateLoginDetails, User.login)
+router.post("/login", validateLoginDetails, User.login);
+
+router.patch("/update", User.updateUser)
 
 
 export default router;

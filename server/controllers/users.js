@@ -23,7 +23,7 @@ class User {
       });
 
       newUser = await newUser.save();
-      
+
       res.status(201).send(newUser);
     } catch (error) {
       console.log(error.message);
@@ -39,14 +39,32 @@ class User {
       const validPassword = await bcrypt.compare(password, user.password);
       if (validPassword) {
         // Generate Token
-        const {firstName, password, _id, lastName, __v, ...userObj} = user._doc;
-        const token = jwt.sign({userObj}, process.env.jwt_secret);
-        res.header('x-auth-token', token)
+        const {
+          firstName,
+          password,
+          _id,
+          lastName,
+          __v,
+          ...userObj
+        } = user._doc;
+        const token = jwt.sign({ userObj }, process.env.jwt_secret);
+        res.header("x-auth-token", token);
         return res.status(200).send(token);
       } else {
         return res.status(401).send("Invalid email or password2");
       }
     }
+  }
+
+  static async updateUser(req, res) {
+    try{
+      const updatedUser = await Users.findOneAndUpdate(req.body.email, req.body, { new: true });
+      console.log(updatedUser);
+      return res.status(200).send(updatedUser)
+    }catch(error){
+      console.log(error)
+    }
+    
   }
 }
 
