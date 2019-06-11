@@ -62,7 +62,6 @@ export const isRegistered = async (req, res, next) => {
         error: "Email already Registered"
       });
     } else {
-      console.log("isRegistered called next");
       next();
     }
   } catch (error) {

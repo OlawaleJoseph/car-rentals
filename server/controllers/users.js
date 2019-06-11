@@ -57,14 +57,22 @@ class User {
   }
 
   static async updateUser(req, res) {
-    try{
-      const updatedUser = await Users.findOneAndUpdate(req.body.email, req.body, { new: true });
-      console.log(updatedUser);
-      return res.status(200).send(updatedUser)
-    }catch(error){
-      console.log(error)
+    try {
+      const updatedUser = await Users.findOneAndUpdate(
+        {email: req.body.email},
+        req.body,
+        { new: true,
+        useFindAndModify: false }
+      );
+      if(updatedUser){
+        return res.status(200).send(updatedUser);
+      }else{
+        return res.status(404).send("User not Found")
+      }
+      
+    } catch (error) {
+      res.status(500).send(error.message);
     }
-    
   }
 }
 
