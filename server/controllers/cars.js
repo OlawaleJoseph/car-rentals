@@ -14,6 +14,18 @@ class Cars {
       res.status(500).send("Server Error");
     }
   }
+
+  static async getAllCars(req, res){
+      try{
+          const cars = await Car.find();
+          res.status(200).send(cars)
+      }catch(error){
+          res.status(500).send(error)
+      }
+     
+
+      
+  }
 }
 
 export default Cars;
