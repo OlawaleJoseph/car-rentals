@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/users";
+import carRoute from "./routes/cars"
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", userRoute);
+app.use("/cars", carRoute)
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
