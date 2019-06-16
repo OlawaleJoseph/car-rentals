@@ -8,6 +8,7 @@ const router = express.Router()
 
 router.get('/', Cars.getAllCars);
 
+router.get('/:id', Cars.getOneCar)
 
 router.post("/",verifyToken, imageMiddleware, Cars.add);
 
