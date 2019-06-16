@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const verifyToken = async (req, res, next) =>{
+export const verifyToken = async (req, res, next) =>{
     const token = req.headers["x-access-token"];
     if(!token){
         return res.status(400).send("No Token Provided")
