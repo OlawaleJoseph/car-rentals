@@ -13,6 +13,8 @@ router.get('/:id', Cars.getOneCar)
 
 router.post("/",verifyToken, imageMiddleware, Cars.add);
 
-router.patch('/:id', verifyToken,verifyCarUpdate, Cars.updateCar)
+router.patch('/:id', verifyToken,verifyCarUpdate, Cars.updateCar);
+
+router.delete('/:id', verifyToken, verifyCarUpdate, Cars.deleteCar)
 
 export default router;
