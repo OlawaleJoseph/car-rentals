@@ -64,6 +64,25 @@ class Cars {
       res.status(400).send("Invalid Car Id");
     }
   }
+
+  static async deleteCar(req, res) {
+    if (!req.params.id) return res.status(400).send("Please Select a Car");
+    try {
+      const car = await Car.findOne({ _id: req.params.id });
+      if (!car) {
+        return res.status(404).send("Car not found");
+      } else {
+        try {
+          await Car.findByIdAndDelete(req.params.id);
+          res.status(204).send("Car deleted successfully");
+        } catch (error) {
+          res.status(500).send("Something went wrong");
+        }
+      }
+    } catch (error) {
+      res.status(404).send("Invalid Car Id");
+    }
+  }
 }
 
 export default Cars;
