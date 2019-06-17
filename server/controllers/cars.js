@@ -37,9 +37,31 @@ class Cars {
           return res.status(200).send(foundCar);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(400).send("Error occured while trying to find car");
       }
+    }
+  }
+
+  static async updateCar(req, res) {
+    try {
+      const foundCar = await Car.findById(req.params.id);
+      if (req.user.email !== foundCar.seller) {
+        res.status(403).send("You are not authorized");
+      } else {
+        try {
+          const updatedUser = await Car.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body,
+            { new: true, useFindAndModify: false }
+          );
+          res.status(200).send(updatedUser);
+        } catch (error) {
+          res.status(404).send("Car does not exist");
+        }
+      }
+    } catch (error) {
+      res.status(400).send("Invalid Car Id");
     }
   }
 }
