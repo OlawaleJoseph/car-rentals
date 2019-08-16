@@ -1,22 +1,22 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import userRoute from "./routes/users";
-import carRoute from "./routes/cars"
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import userRoute from './routes/users';
+import carRoute from './routes/cars';
 
 dotenv.config();
 
 mongoose
   .connect(process.env.URI, { useNewUrlParser: true })
-  .then(() => console.log("Connected to DB"))
+  .then(() => console.log('Connected to DB'))
   .catch(err => console.log(err));
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/auth", userRoute);
-app.use("/cars", carRoute)
+app.use('/auth', userRoute);
+app.use('/cars', carRoute)
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
